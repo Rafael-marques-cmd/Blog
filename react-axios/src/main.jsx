@@ -38,6 +38,10 @@ const router = createHashRouter([
         path: "/posts/edit/:id",
         element: <EditPost />,
       },
+       {
+        path: "*",
+        element: <h1>404 - Página não encontrada</h1>,
+      },
     ],
   },
 ]);
