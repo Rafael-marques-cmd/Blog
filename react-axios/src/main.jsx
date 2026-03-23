@@ -3,7 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import {
+  createHashRouter,
+  RouterProvider,
+  useRouteError,
+} from "react-router-dom";
 
 // páginas
 import Home from "./routes/Home.jsx";
@@ -14,9 +18,23 @@ import EditPost from "./routes/EditPost.jsx";
 
 import "./index.css";
 
+function ErrorBoundary() {
+  const error = useRouteError();
+  console.error("Erro capturado pelo ErrorBoundary:", error);
+  return (
+    <div style={{ padding: "2rem", textAlign: "center" }}>
+      <h1>Oops! Ocorreu um erro no componente.</h1>
+      <p>
+        <i>{error.statusText || error.message}</i>
+      </p>
+    </div>
+  );
+}
+
 const router = createHashRouter([
   {
     element: <App />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "/",
@@ -38,7 +56,7 @@ const router = createHashRouter([
         path: "/posts/edit/:id",
         element: <EditPost />,
       },
-       {
+      {
         path: "*",
         element: <h1>404 - Página não encontrada</h1>,
       },
