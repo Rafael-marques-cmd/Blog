@@ -1,20 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
 
-import { createBrowserRouter, RouterProvider, Router } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from "react-router-dom";
 
 // páginas
-import Home from './routes/Home.jsx';
-import NewPost from './routes/NewPost.jsx';
-import Post from './routes/Post.jsx';
-import Admin from './routes/Admin.jsx';
-import EditPost from './routes/EditPost.jsx';
+import Home from "./routes/Home.jsx";
+import NewPost from "./routes/NewPost.jsx";
+import Post from "./routes/Post.jsx";
+import Admin from "./routes/Admin.jsx";
+import EditPost from "./routes/EditPost.jsx";
 
 import "./index.css";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <App />,
     children: [
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-)
+);
