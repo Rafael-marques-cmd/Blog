@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 
 import {
-  createHashRouter,
+  createBrowserRouter,
   RouterProvider,
   useRouteError,
 } from "react-router-dom";
@@ -31,38 +31,44 @@ function ErrorBoundary() {
   );
 }
 
-const router = createHashRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <ErrorBoundary />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/new",
+          element: <NewPost />,
+        },
+        {
+          path: "/posts/:id",
+          element: <Post />,
+        },
+        {
+          path: "/admin",
+          element: <Admin />,
+        },
+        {
+          path: "/posts/edit/:id",
+          element: <EditPost />,
+        },
+        {
+          path: "*",
+          element: <h1>404 - Página não encontrada</h1>,
+        },
+      ],
+    },
+  ],
   {
-    element: <App />,
-    errorElement: <ErrorBoundary />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/new",
-        element: <NewPost />,
-      },
-      {
-        path: "/posts/:id",
-        element: <Post />,
-      },
-      {
-        path: "/admin",
-        element: <Admin />,
-      },
-      {
-        path: "/posts/edit/:id",
-        element: <EditPost />,
-      },
-      {
-        path: "*",
-        element: <h1>404 - Página não encontrada</h1>,
-      },
-    ],
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
