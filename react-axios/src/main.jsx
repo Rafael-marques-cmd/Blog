@@ -66,7 +66,8 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: import.meta.env.BASE_URL,
+    // basename do vite vem com / no final, o router funciona melhor sem
+    basename: import.meta.env.BASE_URL.replace(/\/$/, ""),
   },
 );
 
