@@ -8,6 +8,29 @@
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 </style>
+    <!-- Script de redirect para SPA no GitHub Pages -->
+    <script type="text/javascript">
+      // Este script converte o query param ?p= de volta para o path correto.
+      // Funciona junto com o 404.html que redireciona sub-rotas.
+      (function(l) {
+        if (l.search[1] === 'p' && l.search[2] === '=' ) {
+          var decoded = l.search.slice(3).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          // Reconstrói a query string original se existir
+          var qIndex = decoded.indexOf('?q=');
+          var query = '';
+          var path = decoded;
+          if (qIndex > -1) {
+            query = decoded.slice(qIndex + 3);
+            path = decoded.slice(0, qIndex);
+          }
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + path + (query ? '?' + query : '') + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
   <body>
     <div id="root"></div>

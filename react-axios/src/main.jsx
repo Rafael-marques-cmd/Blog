@@ -16,8 +16,6 @@ import Post from "./routes/Post.jsx";
 import Admin from "./routes/Admin.jsx";
 import EditPost from "./routes/EditPost.jsx";
 
-import "./index.css";
-
 function ErrorBoundary() {
   const error = useRouteError();
   console.error("Erro capturado pelo ErrorBoundary:", error);
@@ -25,7 +23,7 @@ function ErrorBoundary() {
     <div style={{ padding: "2rem", textAlign: "center" }}>
       <h1>Oops! Ocorreu um erro no componente.</h1>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i>{error?.statusText || error?.message || "Erro desconhecido"}</i>
       </p>
     </div>
   );
@@ -39,23 +37,23 @@ const router = createBrowserRouter(
       errorElement: <ErrorBoundary />,
       children: [
         {
-          path: "/",
+          index: true,
           element: <Home />,
         },
         {
-          path: "/new",
+          path: "new",
           element: <NewPost />,
         },
         {
-          path: "/posts/:id",
+          path: "posts/:id",
           element: <Post />,
         },
         {
-          path: "/admin",
+          path: "admin",
           element: <Admin />,
         },
         {
-          path: "/posts/edit/:id",
+          path: "posts/edit/:id",
           element: <EditPost />,
         },
         {
@@ -66,8 +64,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    // basename do vite vem com / no final, o router funciona melhor sem
-    basename: import.meta.env.BASE_URL.replace(/\/$/, ""),
+    basename: "/Blog",
   },
 );
 
