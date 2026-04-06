@@ -1,17 +1,25 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Blog/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Axios</title>
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
-</style>
-    <script type="module" crossorigin src="/Blog/assets/index-0M2TB98F.js"></script>
-    <link rel="stylesheet" crossorigin href="/Blog/assets/index-ByBOBhin.css">
+    <meta charset="utf-8">
+    <title>Redirecionando...</title>
+    <script>
+      // Técnica SPA para GitHub Pages
+      // Quando o GitHub Pages retorna 404 (ex: /Blog/posts/123),
+      // este script redireciona para /Blog/?p=/posts/123
+      // O index.html então converte de volta para o path correto.
+      var pathSegmentsToKeep = 1; // 1 = mantém "/Blog" no path
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    Redirecionando...
   </body>
 </html>
